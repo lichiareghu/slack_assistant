@@ -1,7 +1,6 @@
 from application_factory import flask_app
 from modules.logger_factory import SlackAssistantLogger
 from routes.action import action_bp
-from functions import draft_email
 
 logger = SlackAssistantLogger(log_directory_path='log/', log_to_file=True)
 logger.set_logger()
