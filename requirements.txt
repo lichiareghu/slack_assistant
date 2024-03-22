@@ -2,4 +2,5 @@ slack_sdk>=3.0
 slack-bolt
 Flask
 python-dotenv
-langchain
+langchain-community
+langchain-openai

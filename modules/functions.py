@@ -1,18 +1,12 @@
-from langchain.chat_models import ChatOpenAI
-from langchain.chains import LLMChain
-from dotenv import find_dotenv, load_dotenv
-from langchain.prompts.chat import (
-    ChatPromptTemplate,
-    SystemMessagePromptTemplate,
-    HumanMessagePromptTemplate,
-)
-
-load_dotenv(find_dotenv())
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from config import Config
 
 
-def draft_email(user_input, name="Dave"):
-    chat = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=1)
-
+def draft_email(user_input, name="Lichia"):
+    signature = f"Kind regards, \n\{name}"
     template = """
 
     You are a helpful assistant that drafts an email reply based on an a new email.
@@ -26,18 +20,24 @@ def draft_email(user_input, name="Dave"):
     Make sure to sign of with {signature}.
 
     """
-
-    signature = f"Kind regards, \n\{name}"
     system_message_prompt = SystemMessagePromptTemplate.from_template(template)
 
     human_template = "Here's the email to reply to and consider any other comments from the user for reply as well: {user_input}"
     human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
 
-    chat_prompt = ChatPromptTemplate.from_messages(
+    prompt = ChatPromptTemplate.from_messages(
         [system_message_prompt, human_message_prompt]
     )
+    output_parser = StrOutputParser()
+    model = ChatOpenAI(model="gpt-3.5-turbo", openai_api_key =  Config.OPENAI_API_KEY)
+    chain = ({"user_input": RunnablePassthrough(),
+              'name': RunnablePassthrough(),
+              'signature': RunnablePassthrough()}
+            | prompt
+            | model
+            | output_parser
+    )
 
-    chain = LLMChain(llm=chat, prompt=chat_prompt)
-    response = chain.run(user_input=user_input, signature=signature, name=name)
-
-    return response
+    return chain.invoke({"user_input": user_input,
+                         'name': name,
+                         'signature': signature})

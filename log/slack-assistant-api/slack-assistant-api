@@ -1,8 +1,12 @@
-2024-03-21 17:13:07,769 P16172 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2024-03-22 06:39:08,728 P6412 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5050
-2024-03-21 17:13:07,769 P16172 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
-2024-03-21 17:13:09,728 P16172 - werkzeug - INFO - 127.0.0.1 - - [21/Mar/2024 17:13:09] "[33mGET / HTTP/1.1[0m" 404 -
-2024-03-21 17:13:09,788 P16172 - werkzeug - INFO - 127.0.0.1 - - [21/Mar/2024 17:13:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
-2024-03-21 17:14:53,560 P16172 - werkzeug - INFO - 127.0.0.1 - - [21/Mar/2024 17:14:53] "[33mPOST / HTTP/1.1[0m" 404 -
-2024-03-21 17:15:05,509 P16172 - werkzeug - INFO - 127.0.0.1 - - [21/Mar/2024 17:15:05] "POST /slack/events HTTP/1.1" 200 -
-2024-03-21 17:15:34,742 P16172 - werkzeug - INFO - 127.0.0.1 - - [21/Mar/2024 17:15:34] "POST /slack/events HTTP/1.1" 200 -
+2024-03-22 06:39:08,728 P6412 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-03-22 06:40:56,169 P30208 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2024-03-22 06:40:56,185 P30208 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-03-22 06:42:04,214 P12688 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2024-03-22 06:42:04,511 P12688 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-03-22 06:43:56,713 P20644 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+2024-03-22 06:43:56,713 P20644 - werkzeug - INFO - [33mPress CTRL+C to quit[0m

@@ -11,3 +11,4 @@ class Config:
     SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
     SLACK_SIGNING_SECRET = os.environ["SLACK_SIGNING_SECRET"]
     SLACK_BOT_USER_ID = os.environ["SLACK_BOT_USER_ID"]
+    OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
