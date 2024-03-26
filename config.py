@@ -12,3 +12,7 @@ class Config:
     SLACK_SIGNING_SECRET = os.environ["SLACK_SIGNING_SECRET"]
     SLACK_BOT_USER_ID = os.environ["SLACK_BOT_USER_ID"]
     OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
+    CLIENT_ID = os.environ["CLIENT_ID"]
+    CLIENT_SECRET = os.environ["CLIENT_SECRET"]
+    SECURE_CONNECT_BUNDLE = os.environ["CONNECTION_FILE_PATH"]
+    KEYSPACE = os.environ["KEYSPACE"]
