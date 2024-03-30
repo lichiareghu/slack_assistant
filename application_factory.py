@@ -3,6 +3,7 @@ from slack_bolt import App
 from config import Config
 from flask import Flask
 from models.database_connection import DatabaseEngine
+from openai import OpenAI
 
 # Initialize the Slack app
 app = App(token=Config.SLACK_BOT_TOKEN)
@@ -12,3 +13,4 @@ app = App(token=Config.SLACK_BOT_TOKEN)
 flask_app = Flask(__name__)
 handler = SlackRequestHandler(app)
 db = DatabaseEngine()
+openai_client = OpenAI(api_key=Config['OPENAI_API_KEY'])

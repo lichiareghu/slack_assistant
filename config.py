@@ -16,3 +16,4 @@ class Config:
     CLIENT_SECRET = os.environ["CLIENT_SECRET"]
     SECURE_CONNECT_BUNDLE = os.environ["CONNECTION_FILE_PATH"]
     KEYSPACE = os.environ["KEYSPACE"]
+    ASSISTANT_ID = os.environ["ASSISTANT_ID"]
