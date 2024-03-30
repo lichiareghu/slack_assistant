@@ -1,6 +1,7 @@
 from application_factory import flask_app, app, handler
 from config import Config
 from modules.functions import draft_email
+from modules.utils import my_function
 from flask import request, Blueprint
 
 action_bp = Blueprint("action", __name__)
@@ -21,7 +22,7 @@ def handle_mentions(body, say):
     mention = f"<@{Config.SLACK_BOT_USER_ID}>"
     text = text.replace(mention, "").strip()
 
-   # response = my_function(text)
+    #response = my_function(text)
     response = draft_email(text)
     say(response)
 
