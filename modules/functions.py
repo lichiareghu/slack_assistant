@@ -3,6 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTempla
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from config import Config
+from application_factory import db
 
 
 def draft_email(user_input, name="Lichia"):
@@ -41,3 +42,6 @@ def draft_email(user_input, name="Lichia"):
     return chain.invoke({"user_input": user_input,
                          'name': name,
                          'signature': signature})
+
+def query_database(qry):
+    return(db.exe(qry))
