@@ -2,8 +2,9 @@ from slack_bolt.adapter.flask import SlackRequestHandler
 from slack_bolt import App
 from config import Config
 from flask import Flask
-from models.database_connection import DatabaseEngine
-from openai import OpenAI
+from models.database_factory import DatabaseEngine
+from modules.chat_factory import ChatWithAssistant
+
 
 # Initialize the Slack app
 app = App(token=Config.SLACK_BOT_TOKEN)
@@ -13,4 +14,4 @@ app = App(token=Config.SLACK_BOT_TOKEN)
 flask_app = Flask(__name__)
 handler = SlackRequestHandler(app)
 db = DatabaseEngine()
-openai_client = OpenAI(api_key=Config.OPENAI_API_KEY)
+assistant = ChatWithAssistant()
