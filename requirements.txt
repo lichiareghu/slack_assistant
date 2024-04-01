@@ -2,6 +2,8 @@ slack_sdk>=3.0
 slack-bolt
 Flask
 python-dotenv
+cassandra-driver
+typing_extensions==4.10.0
+openai==1.14.3
 langchain-community
 langchain-openai
-cassandra-driver

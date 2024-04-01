@@ -1,7 +1,8 @@
-from application_factory import flask_app, app, handler
+from application_factory import flask_app, app, handler,assistant
 from config import Config
-from modules.functions import draft_email
+from modules.functions_factory import draft_email
 from flask import request, Blueprint
+
 
 action_bp = Blueprint("action", __name__)
 
@@ -22,7 +23,11 @@ def handle_mentions(body, say):
     text = text.replace(mention, "").strip()
 
    # response = my_function(text)
-    response = draft_email(text)
+    if text.lower()!="exit":
+        response = assistant.generate_response(text)
+    else:
+        assistant.delete_thread()
+        response = "Closed chat"
     say(response)
 
 

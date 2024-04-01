@@ -3,3 +3,5 @@ describe sakila;
 select show_id,cast from sakila.movies_and_tv;
 command execution: 
 print(DatabaseEngine().exe("select show_id,cast from sakila.movies_and_tv limit 5;"))
+select * from sakila.actor where first_name = 'SANDRA' ALLOW FILTERING;
+describe tables;

@@ -3,8 +3,6 @@ from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTempla
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from config import Config
-from application_factory import db
-
 
 def draft_email(user_input, name="Lichia"):
     signature = f"Kind regards, \n\{name}"
@@ -30,18 +28,16 @@ def draft_email(user_input, name="Lichia"):
         [system_message_prompt, human_message_prompt]
     )
     output_parser = StrOutputParser()
-    model = ChatOpenAI(model="gpt-3.5-turbo", openai_api_key =  Config.OPENAI_API_KEY)
+    model = ChatOpenAI(model="gpt-3.5-turbo", openai_api_key=Config.OPENAI_API_KEY)
     chain = ({"user_input": RunnablePassthrough(),
               'name': RunnablePassthrough(),
               'signature': RunnablePassthrough()}
-            | prompt
-            | model
-            | output_parser
-    )
+             | prompt
+             | model
+             | output_parser
+             )
 
     return chain.invoke({"user_input": user_input,
                          'name': name,
                          'signature': signature})
 
-def query_database(qry):
-    return(db.exe(qry))
