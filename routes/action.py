@@ -23,11 +23,11 @@ def handle_mentions(body, say):
     text = text.replace(mention, "").strip()
 
    # response = my_function(text)
-    if text.lower()!="exit":
+    if text:
         response = assistant.generate_response(text)
-    else:
-        assistant.delete_thread()
-        response = "Closed chat"
+    #else:
+    #    assistant.delete_thread()
+    #    response = "Closed chat"
     say(response)
 
 
