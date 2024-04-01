@@ -10,4 +10,4 @@ flask_app.register_blueprint(action_bp)
 
 # Run the Flask app
 if __name__ == "__main__":
-    flask_app.run()
+    flask_app.run(port=5050)
