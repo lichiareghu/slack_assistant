@@ -60,8 +60,8 @@ class ChatWithAssistant:
                 event_handler=EventHandler(),
         ) as stream:
             stream.until_done()
-
-        return stream.get_final_messages()[0].content[0].text.value
+            return stream._current_message_content.text.value
+        #return stream.get_final_messages()[0].content[0].text.value
 
     def delete_thread(self):
         # close_chat()

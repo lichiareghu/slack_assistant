@@ -6,6 +6,9 @@ from flask import request, Blueprint
 
 action_bp = Blueprint("action", __name__)
 
+@app.event("message")
+def handle_message_events(body, logger):
+    print(body)
 
 @app.event("app_mention")
 def handle_mentions(body, say):
