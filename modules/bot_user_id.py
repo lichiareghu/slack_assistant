@@ -1,7 +1,8 @@
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
+import os
 
-SLACK_BOT_TOKEN = "xoxb-6830405625878-6849850568769-wkj4f4FcLJlHo5VttBQpk7f8"
+SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
 
 def get_bot_user_id():
     """
