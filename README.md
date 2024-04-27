@@ -5,7 +5,7 @@ license: apache-2.0
 ---
 
 # Description
-Build an assistant on slack to help with the daily activities
+Build an assistant using the Open AI API and integrate it to slack. Instruct the chatbot to help with the daily activities of the person who installs it on his slack workspace
 
 ### Software and tools requirement
 1. [Github Account](https://github.com)
