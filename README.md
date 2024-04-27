@@ -9,7 +9,7 @@ Build an assistant using the Open AI API and integrate it to slack. Instruct the
 
 ### Software and tools requirement
 1. [Github Account](https://github.com)
-2. [Pycharm IDE](https://code.visualstudio.com/](https://www.jetbrains.com/pycharm/)
+2. [Pycharm IDE](https://www.jetbrains.com)
 3. [GitCLI](https://git-scm.com)
 4. [Render](https://slack-assistant.onrender.com)
 
