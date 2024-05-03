@@ -1,34 +1,30 @@
-import json
 import re
-
+import json
 from config import Config
 # from modules.functions_factory import query_database
 from typing_extensions import override
-import openai
-from openai import OpenAI
+from openai import AssistantEventHandler, OpenAI
 
 
-class EventHandler(openai.AssistantEventHandler):
+class EventHandler(AssistantEventHandler):
     @override
     def on_text_created(self, text) -> None:
-        print(end="", flush=True)
+        print(f"\nassistant > ", end="", flush=True)
 
     @override
-    def on_text_delta(self, delta, snapshot):
-        print(delta.value, end="", flush=True)
-
     def on_tool_call_created(self, tool_call):
         print(f"\nassistant > {tool_call.type}\n", flush=True)
 
-    def on_tool_call_delta(self, delta, snapshot):
-        if delta.type == 'code_interpreter':
-            if delta.code_interpreter.input:
-                print(delta.code_interpreter.input, end="", flush=True)
-            if delta.code_interpreter.outputs:
-                print(f"\n\noutput >", flush=True)
-                for output in delta.code_interpreter.outputs:
-                    if output.type == "logs":
-                        print(f"\n{output.logs}", flush=True)
+    @override
+    def on_message_done(self, message) -> None:
+        # print a citation to the file searched
+        message_content = message.content[0].text
+        annotations = message_content.annotations
+        for index, annotation in enumerate(annotations):
+            message_content.value = message_content.value.replace(
+                annotation.text, f"[{index}]"
+            )
+        print(message_content.value)
 
 
 class ChatWithAssistant:
@@ -36,37 +32,24 @@ class ChatWithAssistant:
         """This function will load the assistant id and state variables
         required for continuous contextual chat with the assistant"""
         self.openai_client = OpenAI(api_key=Config.OPENAI_API_KEY)
-        self.session_state = {"assistant_state": Config.ASSISTANT_ID,
-                              "messages": [],
-                              "last_openai_run_state": None,
-                              "thread_state": self.openai_client.beta.threads.create(),
-                              "lock_flag": False}
+        self.assistant = Config.ASSISTANT_ID
+        self.thread = self.openai_client.beta.threads.retrieve("thread_RZfMfM1ZoyyTKopYguHR4oDk")
 
-    def generate_response(self, message, instruction=None, role='user'):
+    def run_assistant(self,message):
+
+        # Create messages on the thread id
         self.openai_client.beta.threads.messages.create(
-            thread_id=self.session_state["thread_state"].id,
+            thread_id=self.thread.id,
             role="user",
-            content=message,
-            metadata={"role": role}
-        )
-        # Then, we use the `create_and_stream` SDK helper
-        # with the `EventHandler` class to create the Run
-        # and stream the response.
-
-        with self.openai_client.beta.threads.runs.create_and_stream(
-                thread_id=self.session_state["thread_state"].id,
-                assistant_id=self.session_state["assistant_state"],
-                instructions=instruction,
-                event_handler=EventHandler(),
+            content=message
+            )
+        with self.openai_client.beta.threads.runs.stream(
+                thread_id=self.thread.id,
+                assistant_id=self.assistant,
+                event_handler=EventHandler()
         ) as stream:
             stream.until_done()
             return stream._current_message_content.text.value
-        # return stream.get_final_messages()[0].content[0].text.value
-
-    def delete_thread(self):
-        # close_chat()
-        if self.session_state["thread_state"]:
-            self.openai_client.beta.threads.delete(self.session_state["thread_state"].id)
 
 
 class Completions:

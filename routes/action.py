@@ -27,11 +27,11 @@ def handle_mentions(body, say):
 
    # response = my_function(text)
     if text:
-        response = assistant.generate_response(text)
+        resp = assistant.run_assistant(text)
     #else:
     #    assistant.delete_thread()
     #    response = "Closed chat"
-    say(response)
+    say(resp)
 
 
 @action_bp.route("/slack/events", methods=["POST"])
